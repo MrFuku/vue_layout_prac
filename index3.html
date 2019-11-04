@@ -9,11 +9,48 @@
 <body>
 
 <div id="app" class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Step:{{ stepNumber }}</h1>
+    <form-name v-if="stepNumber === 1"></form-name>
+    </div>
+
+    <pre><code>{{ form }}</code></pre>
+  </div>
 </div>
+
 <script>
+  Vue.component('form-name',{
+    template: `<form>
+          <h2>Name Info</h2>
+          <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" v-model="firstName" placeholder="Enter First Name">
+          </div>					
+          <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" v-model="lastName" placeholder="Enter Last Name">
+          </div>
+          </form>`,
+    data: function(){
+      return {
+        firstName: null,
+        lastName: null
+      }
+    },
+  });
+
 	const app = new Vue({
 		el: '#app',
 		data: {
+			stepNumber: 1,
+			form: {
+				firstName: null,
+				lastName: null,
+				Email: null,
+				tel: null,
+				birthday: null
+			}
 		},
 	});
 </script>
