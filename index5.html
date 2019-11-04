@@ -15,12 +15,12 @@
             <form @submit.prevent="submitForm">
               <div class="form-group">
                 <label for="name">名前:</label>
-                <input type="name" class="form-control" id="name" v-model="name" @blur="$v.name.$touch()">
+                <input type="name" class="form-control" id="name" v-model="name" @blur="$v.name.$touch()" :class="{ error : $v.name.$error,'form-control': true }">
                 <span v-if="$v.name.$error">名前が入力されていません。</span>
               </div>
               <div class="form-group">
                 <label for="age">年齢:</label>
-                <input type="age" class="form-control" id="age" v-model="age" @blur="$v.age.$touch()">
+                <input type="age" class="form-control" id="age" v-model="age" @blur="$v.age.$touch()" :class="{ error : $v.age.$error,'form-control': true }">
                 <div v-if="$v.age.$error">
                   <span v-if="!$v.age.required">年齢が入力されていません。</span>
                   <span v-if="!$v.age.integer">整数の数字以外は入力できません。</span>
@@ -28,7 +28,7 @@
               </div>
               <div class="form-group">
                 <label for="email">メールアドレス:</label>
-                <input type="email" class="form-control" id="name" v-model="email" @blur="$v.email.$touch()">
+                <input type="email" class="form-control" id="name" v-model="email" @blur="$v.email.$touch()" :class="{ error : $v.email.$error,'form-control': true }">
                 <div v-if="$v.email.$error">
                   <span v-if="!$v.email.required">メールドレスが入力されていません。</span>
                   <span v-if="!$v.email.email">メールアドレスの形式が正しくありません。</span>
@@ -75,5 +75,12 @@
       }
     });
   </script>
+  <style>
+    .error {
+      color: #8a0421;
+      border-color: #dd0f3b;
+      background-color: #ffd9d9;
+    }
+  </style>
 </body>
 </html>
