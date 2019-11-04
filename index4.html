@@ -14,16 +14,20 @@
   <script>
     var app = new Vue({
       el: '#app',
+      data: {
+        labels : ['2019年1月', '2019年2月', '2019年3月', '2019年4月'],
+        data: [120, 190, 34, 58]
+      },
       methods:{
         displayGraph: function(){
           var ctx = document.getElementById('myChart').getContext('2d');
           var myChart = new Chart(ctx, {
           type: 'line',
           data: {
-              labels: ['2019年1月', '2019年2月', '2019年3月', '2019年4月'],
+              labels: this.labels,
               datasets: [{
                   label: '四半期の売上数の遷移',
-                  data: [120, 190, 34, 58]
+                  data: this.data
               }]
             }
           });
