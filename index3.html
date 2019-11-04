@@ -15,6 +15,7 @@
       <form-name v-if="stepNumber === 1" @update="updateForm"></form-name>
       <form-contact v-if="stepNumber === 2" @update="updateForm"></form-contact>
       <form-birthday v-if="stepNumber === 3" @update="updateForm"></form-birthday>
+      <form-confirm v-if="stepNumber === 4" :form="form"></form-confirm>
       <button class="btn btn-primary" @click="backStep" v-show="stepNumber != 1">Back</button>
       <button class="btn btn-primary" @click="nextStep" v-show="stepNumber != 4">Next</button>
     </div>
@@ -100,6 +101,19 @@
         });
       }
     }
+  });
+
+  Vue.component('form-confirm',{
+    template: `<div>
+        <h2>Confirmation</h2>
+      <p>Name: {{ form.firstName }} {{ form.lastName }}</p>
+      <p>Email: {{ form.Email }}</p>
+      <p>Tel: {{ form.tel }}</p>
+      <p>Birthday: {{ form.birthday }}</p>
+      </div>`,
+    props:{
+      form: Object
+    },
   });
 
 	const app = new Vue({
