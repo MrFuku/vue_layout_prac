@@ -34,7 +34,7 @@
                   <span v-if="!$v.email.email">メールアドレスの形式が正しくありません。</span>
                 </div>
               </div>
-              <button :disabled="$v.$invalid" type="submit" class="btn btn-info">送信</button>
+              <button type="submit" class="btn btn-info">送信</button>
             </form>
           </div>
       </div>
@@ -66,9 +66,11 @@
       },
       methods: {
         submitForm(){
-          if (this.$v.$invalid) {
+          this.$v.$touch();
+          if(this.$v.$invalid){
             console.log('バリデーションエラー');
-          } else {
+          }else{
+            // データ登録の処理をここに記述
             console.log('submit');
           }
         }
