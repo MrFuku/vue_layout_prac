@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-md-8">
       <h1>Step:{{ stepNumber }}</h1>
-    <form-name v-if="stepNumber === 1"></form-name>
+    <form-name v-if="stepNumber === 1" @update="updateForm"></form-name>
     </div>
 
     <pre><code>{{ form }}</code></pre>
@@ -21,7 +21,7 @@
 
 <script>
   Vue.component('form-name',{
-    template: `<form>
+    template: `<form @input="submit">
           <h2>Name Info</h2>
           <div class="form-group">
           <label for="firstName">First Name</label>
@@ -38,6 +38,14 @@
         lastName: null
       }
     },
+    methods: {
+      submit: function(){
+        this.$emit('update',{
+          firstName: this.firstName,
+          lastName: this.lastName
+        });
+      }
+    }
   });
 
 	const app = new Vue({
@@ -52,6 +60,11 @@
 				birthday: null
 			}
 		},
+    methods:{
+      updateForm:function(formData){
+        Object.assign(this.form, formData);
+      },
+    }
 	});
 </script>
 </body>
