@@ -9,11 +9,24 @@
 <body>
   <div id="app">
     <v-app>
+        <input type="text" v-model="searchMessage">
+        <v-card-title>
+            Nutrition
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
         <v-data-table
           v-model="selected"
           :headers="headers"
           :items="desserts"
           :single-select="singleSelect"
+          :search="search"
           item-key="hash"
           show-select
           class="elevation-1"
@@ -34,6 +47,7 @@
       data () {
       return {
         singleSelect: false,
+        search: '',
         selected: [],
         headers: [
           { text: '作成日', value: 'date' },
