@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <title>Vue.js sample</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
   </head>
   <body>
     <h2>GoogleChartsで円グラフを表示させる例</h2>
     <h3>好きなランチ投票</h3>
     <div id="chart_div" style="height:500px;"></div>
+    <div id="app">
+      <li v-for="(item, c) in dataArray" v-if="c>0">
+        {{ `${item[0]} : ${item[1]}` }}
+        <button @click="addOne(c)">一票</button>
+      </li>
+    </div>
 
     <script>
       // グラフに使うデータ
@@ -32,6 +39,22 @@
         var chart   = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+    </script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          dataArray: orgdata
+        },
+        methods: {
+          addOne: function(val) {
+            var obj = this.dataArray[val];
+            obj[1]++;
+            this.dataArray.splice(val, 1, obj);
+            drawBasic();
+          }
+        },
+      });
     </script>
   </body>
 </html>
