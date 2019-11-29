@@ -7,12 +7,22 @@
 </head>
 <body>
 	<div id="app">
-		<h1>{{ title }}</h1>
+    <h1>{{ title }}</h1>
+    <h2>{{ message }}</h2>
 	</div>
 
 	<script>
+    const myMixin = {
+			data(){
+				return {
+					message : 'hello from mixins',
+				}
+			},
+		}
+
 		const app = new Vue({
 			el: '#app',
+      mixins: [myMixin],
 			data: {
 				title : 'Hello Mixins',
 			}
