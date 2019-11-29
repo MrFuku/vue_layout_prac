@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Mixinsの理解</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+    <h1>{{ title }}</h1>
+    <h2>{{ upper }}</h2>
+    <button @click="alert">Click Here</button>
+	</div>
+
+	<script>
+    const myMixin = {
+			data(){
+				return {
+					message : 'hello from mixins',
+				}
+			},
+      methods:{
+        alert(){
+          alert(this.message);
+        },
+      },
+      computed:{
+        upper(){
+          return this.message.toUpperCase();
+        },
+      }
+		}
+
+		const app = new Vue({
+			el: '#app',
+      mixins: [myMixin],
+			data: {
+				title : 'Hello Mixins',
+			},
+		})
+	</script>
+</body>
+</html>
