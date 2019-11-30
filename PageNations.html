@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-app-bar app>
+        <v-toolbar-title>
+          <span>Vuetify Pagination</span>
+        </v-toolbar-title>
+      </v-app-bar>
+
+      <v-content>
+        <div class="text-center">
+          <v-list>
+            <v-list-item v-for="list in displayLists" :key="list.index">
+              <v-list-item-content>
+                <v-list-item-title>{{ list.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+      
+          <v-pagination
+            v-model="page"
+            :length="length"
+            @input = "getNumber"
+          ></v-pagination>
+        </div>     
+      </v-content>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data () {
+        return {
+          page: 1,
+          length:0,
+          lists: [],
+          displayLists: [],
+          pageSize: 10,
+        }
+      },
+      methods: {
+        getNumber(number) {
+          this.page = number
+          this.pageChange(this.page)
+        },
+        pageChange(pageNumber) {
+          const pageIndex = this.pageSize * (pageNumber - 1)
+          this.displayLists = this.lists.slice(pageIndex, pageIndex + this.pageSize);
+        },
+      },
+      mounted (){
+        this.lists = new Array(99).fill().map((v,i)=> {
+          return { id : i,title : 'Title' + i };
+        });
+        this.length = Math.ceil(this.lists.length / this.pageSize);
+        this.pageChange(this.page)
+      },
+    })
+  </script>
+</body>
+</html>
