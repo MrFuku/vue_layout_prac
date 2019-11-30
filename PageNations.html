@@ -27,7 +27,7 @@
       
           <v-pagination
             v-model="page"
-            :length="6"
+            :length="length"
             @input = "getNumber"
           ></v-pagination>
         </div>     
@@ -44,6 +44,7 @@
       data () {
         return {
           page: 1,
+          length:0,
           lists: [],
           displayLists: [],
           pageSize: 10,
@@ -63,6 +64,7 @@
         this.lists = new Array(99).fill().map((v,i)=> {
           return { id : i,title : 'Title' + i };
         });
+        this.length = Math.ceil(this.lists.length / this.pageSize);
         this.pageChange(this.page)
       },
     })
