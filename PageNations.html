@@ -51,14 +51,19 @@
       },
       methods: {
         getNumber(number) {
-          console.log(number)
-        }
+          this.page = number
+          this.pageChange(this.page)
+        },
+        pageChange(pageNumber) {
+          const pageIndex = this.pageSize * (pageNumber - 1)
+          this.displayLists = this.lists.slice(pageIndex, pageIndex + this.pageSize);
+        },
       },
       mounted (){
         this.lists = new Array(99).fill().map((v,i)=> {
           return { id : i,title : 'Title' + i };
         });
-        this.displayLists = this.lists.slice(0, this.pageSize);
+        this.pageChange(this.page)
       },
     })
   </script>
