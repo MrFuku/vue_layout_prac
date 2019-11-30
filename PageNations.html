@@ -20,6 +20,7 @@
           <v-pagination
             v-model="page"
             :length="6"
+            @input="getNumber"
           ></v-pagination>
         </div>     
       </v-content>
@@ -35,6 +36,11 @@
       data () {
         return {
           page: 1,
+        }
+      },
+      methods: {
+        getNumber(number) {
+          console.log(number)
         }
       },
     })
