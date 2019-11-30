@@ -14,6 +14,15 @@
           <span>Vuetify Pagination</span>
         </v-toolbar-title>
       </v-app-bar>
+
+      <v-content>
+        <div class="text-center">
+          <v-pagination
+            v-model="page"
+            :length="6"
+          ></v-pagination>
+        </div>     
+      </v-content>
     </v-app>
   </div>
 
@@ -23,6 +32,11 @@
     new Vue({
       el: '#app',
       vuetify: new Vuetify(),
+      data () {
+        return {
+          page: 1,
+        }
+      },
     })
   </script>
 </body>
