@@ -17,10 +17,18 @@
 
       <v-content>
         <div class="text-center">
+          <v-list>
+            <v-list-item v-for="list in lists" :key="list.index">
+              <v-list-item-content>
+                <v-list-item-title>{{ list.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+      
           <v-pagination
             v-model="page"
             :length="6"
-            @input="getNumber"
+            @input = "getNumber"
           ></v-pagination>
         </div>     
       </v-content>
@@ -36,12 +44,18 @@
       data () {
         return {
           page: 1,
+          lists: [],
         }
       },
       methods: {
         getNumber(number) {
           console.log(number)
         }
+      },
+      mounted (){
+        this.lists = new Array(99).fill().map((v,i)=> {
+          return { id : i,title : 'Title' + i };
+        });
       },
     })
   </script>
